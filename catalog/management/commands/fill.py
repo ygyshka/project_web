@@ -10,6 +10,7 @@ class Command(BaseCommand):
             {'name': "Рыба", 'description': "Морская/речная продукция"},
             {'name': "Мясо", 'description': "Продукция белкового состава"},
             {'name': "Молоко", 'description': "Продукция молочного состава"},
+            {'name': "Инструменты", 'description': "Разные детали"}
         ]
         # для меньшей нагрузки подключения к бд лучше использовать такой метод передачи данных к модели
         # с дальнейшей записью в бд, в противном случае если идти через цикл по списку и кажэдый item
@@ -20,5 +21,8 @@ class Command(BaseCommand):
             category_for_create.append(
                 Category(**item)
             )
+        # Очищение таблици перед записью новых данных
+        # (ньанс только в том, что не понимаю почему айдишники инкрементируются)
+        Category.objects.all().delete()
 
         Category.objects.bulk_create(category_for_create)
