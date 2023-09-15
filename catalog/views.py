@@ -17,15 +17,19 @@ def contacts(request):
 
 
 def home(request):
-    return render(request, 'catalog/home.html')
-
-
-def products(request):
     product_list = Product.objects.all()
     context = {
         'product_list': product_list,
     }
+    return render(request, 'catalog/home.html', context)
 
-    return render(request, 'catalog/products.html', context)
+
+def product(request, pk):
+    product_ = Product.objects.get(id=pk)
+    context = {
+        'object': product_,
+    }
+
+    return render(request, 'catalog/product.html', context)
 
 
