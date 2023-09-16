@@ -1,6 +1,4 @@
 
-
-
     {% extends 'catalog/base_page.html' %}
     {% load my_tags %}
     {% block content %}
@@ -17,12 +15,10 @@
                         <img src="{{ object.picture|mediapath}}" class="card-img-top">
                         <h3 class="card-title">{{ object.name }}</h3>
                         <p class="card-text">$ {{ object.price }}</p>
-                        <p class="card-text">{{ object.description }}</p>
-
+                        <p class="card-text">{{ object.description|truncatechars:100 }}</p>
                     </div>
                 </div>
             </div>
-
     {% endblock %}
 
 
