@@ -7,5 +7,5 @@ app_name = CatalogConfig.name
 urlpatterns = [
     path('', home, name='home'),
     path('contacts/', contacts, name='contacts'),
-    path('/<int:pk>/product', product, name='product'),
+    path('/product/<int:pk>', product, name='product'),
 ]
