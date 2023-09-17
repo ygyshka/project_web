@@ -8,7 +8,7 @@ def mediapath(val):
     if val:
         return f"/media/{val}"
 
-    return '#'
+    return ''
 
 
 @register.simple_tag()
@@ -16,4 +16,4 @@ def mediapath(val):
     if val:
         return f"/media/{val}"
 
-    return '#'
+    return ''
