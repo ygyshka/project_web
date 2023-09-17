@@ -3,7 +3,7 @@
     {% block content %}
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
             <h1 class="display-4">Продукты</h1>
-        </div>
+    </div>
     {% for object in product_list %}
         <div class="row text-center">
             <div class="col">
@@ -16,8 +16,8 @@
                         <ul class="list-unstyled mt-3 mb-4 text-start m-3 text-center">
                             <li>- {{ object.description|truncatechars:100 }}</li>
                         </ul>
-                        <div   class="btn btn-primary text-right"  >
-                            <a href="{% url 'catalog:product' object.id %}" class="btn btn-primary form-control">Подробнее</a>
+                        <div class="btn btn-primary" >
+                            <a href="{% url 'catalog:product' object.id %}" class="btn btn-primary form-control float-right">Подробнее</a>
                         </div>
                     </div>
                 </div>
