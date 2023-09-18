@@ -23,7 +23,7 @@ class BlogListView(ListView):
     model = Blog
 
     def get_queryset(self, *args, **kwargs):
-        queryset = super().get_queryset(*args, **kwargs)
+        queryset = super().get_queryset()
         queryset = queryset.filter(to_published=True)
         return queryset
 
@@ -41,18 +41,17 @@ class BlogDetailView(DetailView):
 class BlogUpdateView(UpdateView):
     model = Blog
     fields = ('title', 'content', 'preview', 'to_published')
-    # success_url = reverse_lazy('blog:blog_list')
 
     def form_valid(self, form):
         if form.is_valid():
             new_mat = form.save()
             new_mat.slug = slugify(new_mat.title)
             new_mat.save()
-
+            self.kwargs['slug'] = new_mat.slug
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('blog:view', args=[self.kwargs.get('pk')])
+        return reverse('blog:view', args=[self.kwargs.get('slug')])
 
 
 class BlogDeleteView(DeleteView):

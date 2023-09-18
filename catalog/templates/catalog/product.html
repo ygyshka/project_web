@@ -13,7 +13,7 @@
                 <div class="text-bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
                     <div class="my-3 py-3">
                         <p class="card-text"><h1 class="card-title">{{ object.name|title }}</h1></p>
-                        <img src="{{ object.picture|mediapath}}" class="card-img-top">
+                        <p><img src="{{ object.picture|mediapath }}" class="card-img-top"></p>
                         <p class="card-text">$ {{ object.price }}</p>
                         <p class="card-text">{{ object.description|truncatechars:100 }}</p>
                     </div>
