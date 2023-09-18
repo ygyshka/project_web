@@ -4,23 +4,23 @@
         <a type="button" class="btn btn-sm btn-primary" href="{% url 'blog:create'%}">Добавить блог</a>
     </div>
 {% for object in object_list %}
-    <div class="row text-center">
-        <div class="col">
-            <div class="card mb-4 box-shadow">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">{{ object.title|title }}</h4>
-                </div>
-                <div class="card-body">
-
-                        <div class="btn-group">
-                            <a href="{% url 'blog:view' object.slug %}" type="button" class="btn btn-sm btn-primary">Просмотреть</a>
-                            <a href="{% url 'blog:edit' object.slug %}" type="button" class="btn btn-sm btn-success">Изменить</a>
-                            <a href="{% url 'blog:blog_confirm_delete' object.slug %}" type="button" class="btn btn-sm btn-danger">Удалить</a>
+    <form method="post" enctype="multipart/form-data">
+        <div class="row text-center">
+            <div class="col">
+                <div class="card mb-4 box-shadow">
+                        <div class="card-header">
+                            <h4 class="my-0 font-weight-normal">{{ object.title|title }}</h4>
+                        </div>
+                        <div class="card-body">
+                                <div class="btn-group">
+                                    <a href="{% url 'blog:view' object.slug %}" type="button" class="btn btn-sm btn-primary">Просмотреть</a>
+                                    <a href="{% url 'blog:edit' object.slug %}" type="button" class="btn btn-sm btn-success">Изменить</a>
+                                    <a href="{% url 'blog:blog_confirm_delete' object.slug %}" type="button" class="btn btn-sm btn-danger">Удалить</a>
+                                </div>
                         </div>
                 </div>
-
             </div>
         </div>
-    </div>
+    </form>
 {% endfor %}
 {% endblock %}
