@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     'catalog',
     'blog',
+    'django_bootstrap5',
 ]
 
 MIDDLEWARE = [

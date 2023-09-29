@@ -1,27 +1,40 @@
-
-    {% extends 'catalog/base_page.html' %}
-    {% block content %}
+{% extends 'catalog/base_page.html' %}
+{% block content %}
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-            <h1 class="display-4">Продукты</h1>
+        <h1 class="display-4">Продукты</h1>
     </div>
-    {% for object in product_list %}
-        <div class="row text-center">
-            <div class="col">
+    <div class="col-12 mb-5">
+        <a type="button" class="btn btn-sm btn-primary" href="{% url 'catalog:create' %}">Добавить продукт</a>
+    </div>
+
+    <div class="row text-center">
+        {% for object in product_list %}
+            <div class="col-4">
                 <div class="card mb-4 box-shadow">
                     <div class="card-header">
                         <h4 class="my-0 font-weight-normal">{{ object.name|upper }}</h4>
                     </div>
+
                     <div class="card-body">
                         <h1 class="card-title pricing-card-title">$ {{ object.price }}</h1>
                         <ul class="list-unstyled mt-3 mb-4 text-start m-3 text-center">
                             <li>- {{ object.description|truncatechars:100 }}</li>
                         </ul>
-                        <div class="btn btn-primary" >
-                            <a href="{% url 'catalog:product' object.id %}" class="btn btn-primary form-control float-right">Подробнее</a>
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group-md">
+                            <a href="{% url 'catalog:product' object.id %}" type="button"
+                               class="btn btn-sm  btn-primary">Просмотреть</a>
+                            <a href="{% url 'catalog:update' object.id %}" type="button"
+                               class="btn btn-sm btn-success">Изменить</a>
+                            <a href="{% url 'catalog:product_confirm_delete' object.id %}" type="button"
+                               class="btn btn-sm btn-danger">Удалить</a>
+
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
-    {% endblock %}
+        {% endfor %}
+    </div>
+
+{% endblock %}
