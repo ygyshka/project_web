@@ -3,7 +3,15 @@ from django import forms
 from catalog.models import Product, Version
 
 
-class ProductForm(forms.ModelForm):
+class MixinForm:
+
+    def __int__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+
+
+class ProductForm(MixinForm, forms.ModelForm):
 
     class Meta:
         model = Product
@@ -31,8 +39,18 @@ class ProductForm(forms.ModelForm):
 
         return cleaned_data
 
-class VersionForm(forms.ModelForm):
+
+class VersionForm(MixinForm, forms.ModelForm):
 
     class Meta:
         model = Version
         fields = '__all__'
+
+    # def clean_is_activ(self):
+    #     cleaned_data = self.cleaned_data['is_activ']
+    #
+    #     # print(cleaned_data)
+    #     if cleaned_data:
+    #         raise forms.ValidationError(f'Слово  недопустипо в описании!')
+    #
+    #     return cleaned_data
