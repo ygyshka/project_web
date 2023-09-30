@@ -19,6 +19,14 @@
                         <h1 class="card-title pricing-card-title">$ {{ object.price }}</h1>
                         <ul class="list-unstyled mt-3 mb-4 text-start m-3 text-center">
                             <li>- {{ object.description|truncatechars:100 }}</li>
+{#select * from catalog_version#}
+{#join catalog_product on(catalog_product.id = catalog_version.product_id)#}
+                            {% for version in object.versions.all %}
+                                {% if version.is_activ %}
+                            <li>- Название версии:{{ version.title_version}}</li>
+                            <li>- Номер версии:{{ version.number}}</li>
+                                {% endif %}
+                            {% endfor %}
                         </ul>
                     </div>
                     <div class="card-footer">

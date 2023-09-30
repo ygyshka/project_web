@@ -50,7 +50,7 @@ class ProductUpdateView(UpdateView):
         if self.request.method == 'POST':
             formset = VersionFormset(self.request.POST, instance=self.object)
         else:
-            formset = VersionFormset( instance=self.object)
+            formset = VersionFormset(instance=self.object)
 
         context_data['formset'] = formset
         return context_data
@@ -63,10 +63,12 @@ class ProductUpdateView(UpdateView):
             formset.instance = self.object
             formset.save()
 
-
         return super().form_valid(form)
 
 
 class ProductDeleteView(DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:home')
+
+
+
