@@ -1,6 +1,6 @@
 from django import forms
 
-from catalog.models import Product
+from catalog.models import Product, Version
 
 
 class ProductForm(forms.ModelForm):
@@ -30,3 +30,9 @@ class ProductForm(forms.ModelForm):
                 raise forms.ValidationError(f'Слово "{item}" недопустипо в описании!')
 
         return cleaned_data
+
+class VersionForm(forms.ModelForm):
+
+    class Meta:
+        model = Version
+        fields = '__all__'
