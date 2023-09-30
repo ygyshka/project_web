@@ -23,6 +23,7 @@
 {#join catalog_product on(catalog_product.id = catalog_version.product_id)#}
                             {% for version in object.versions.all %}
                                 {% if version.is_activ %}
+                                    <hr>
                             <li>- Название версии:{{ version.title_version}}</li>
                             <li>- Номер версии:{{ version.number}}</li>
                                 {% endif %}
