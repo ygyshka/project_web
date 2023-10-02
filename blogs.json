@@ -1,0 +1,162 @@
+[
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "Форель",
+      "description": "Рыба пресноводная, богатая железом",
+      "picture": "",
+      "category_id": 21,
+      "price": 500,
+      "date_create": "2023-09-11T12:29:48.986Z",
+      "date_change": "2023-09-11T12:29:48.986Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "name": "Бедра куринные",
+      "description": "Часть курицы с мясом",
+      "picture": "",
+      "category_id": 22,
+      "price": 350,
+      "date_create": "2023-09-18T09:26:42.242Z",
+      "date_change": "2023-09-11T12:31:08.294Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "name": "Сыр обыкновенный",
+      "description": "Кисло-молочный продукт",
+      "picture": "products/tm23sYH4bfFahowZcjBw.jpg",
+      "category_id": 23,
+      "price": 250,
+      "date_create": "2023-09-15T17:18:53.726Z",
+      "date_change": "2023-09-11T12:31:47.954Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "name": "Молоток",
+      "description": "Для забивание гвоздей",
+      "picture": "products/molotok-04kg-s-derevyannoj-ruchkoj-niz-25003015-1000x1000_Dr6Sehk.jpg",
+      "category_id": 24,
+      "price": 200,
+      "date_create": "2023-09-30T10:30:12.597Z",
+      "date_change": "2023-09-16T09:31:25.090Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 11,
+    "fields": {
+      "name": "1111бир3333",
+      "description": "222222222",
+      "picture": "",
+      "category_id": 21,
+      "price": 18,
+      "date_create": "2023-09-30T10:30:27.106Z",
+      "date_change": "2023-09-29T11:42:38.269Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 12,
+    "fields": {
+      "name": "111крпта15322",
+      "description": "Биржрика",
+      "picture": "",
+      "category_id": 21,
+      "price": 5555,
+      "date_create": "2023-09-30T10:29:58.449Z",
+      "date_change": "2023-09-29T13:08:03.071Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 21,
+    "fields": {
+      "name": "Рыба",
+      "description": "Морская/речная продукция"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 22,
+    "fields": {
+      "name": "Мясо",
+      "description": "Продукция белкового состава"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 23,
+    "fields": {
+      "name": "Молоко",
+      "description": "Продукция молочного состава"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 24,
+    "fields": {
+      "name": "Инструменты",
+      "description": "Разные детали"
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 14,
+    "fields": {
+      "product": 6,
+      "number": 66666666,
+      "title_version": "LP",
+      "is_activ": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 17,
+    "fields": {
+      "product": 11,
+      "number": 77777777,
+      "title_version": "LP",
+      "is_activ": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 18,
+    "fields": {
+      "product": 12,
+      "number": 5555555,
+      "title_version": "grg",
+      "is_activ": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 19,
+    "fields": {
+      "product": 6,
+      "number": 7777777,
+      "title_version": "rfrf",
+      "is_activ": false
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 20,
+    "fields": {
+      "product": 11,
+      "number": 3333333,
+      "title_version": "ert",
+      "is_activ": true
+    }
+  }
+]
