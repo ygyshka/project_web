@@ -2,7 +2,7 @@ from django.urls import path
 from django.views.generic import TemplateView
 
 from users.apps import UsersConfig
-from users.views import UserLoginView, UserLogoutView, Register, EmailVerify
+from users.views import UserLoginView, UserLogoutView, Register, EmailVerify, ProfileUpdateView
 
 app_name = UsersConfig.name
 
@@ -20,4 +20,7 @@ urlpatterns = [
         EmailVerify.as_view(),
         name='verify_email',
     ),
+
+    path('profile/', ProfileUpdateView.as_view(), name='profile')
+
 ]
