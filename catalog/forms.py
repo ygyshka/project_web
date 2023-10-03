@@ -46,12 +46,3 @@ class VersionForm(MixinForm, forms.ModelForm):
     class Meta:
         model = Version
         fields = '__all__'
-
-    # def clean_is_activ(self):
-    #     cleaned_data = self.cleaned_data['is_activ']
-    #
-    #     # print(cleaned_data)
-    #     if cleaned_data:
-    #         raise forms.ValidationError(f'Слово  недопустипо в описании!')
-    #
-    #     return cleaned_data

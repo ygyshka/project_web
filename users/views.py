@@ -6,7 +6,8 @@ from django.contrib.auth.views import LogoutView
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.utils.crypto import get_random_string
 from django.utils.http import urlsafe_base64_decode
 from django.views import View
 from django.contrib.auth.tokens import (default_token_generator
@@ -24,6 +25,7 @@ from users.utils import send_email_for_verify
 class UserLoginView(LoginView):
     form_class = MyAuthenticationForm
     template_name = 'users/login.html'
+    # success_url = 'catalog/home.html'
 
 
 class UserLogoutView(LogoutView):
@@ -97,3 +99,20 @@ class ProfileUpdateView(UpdateView):
 
 
         return self.request.user
+
+
+def generate_new_password(request):
+
+    new_password = get_random_string(10)
+
+    send_mail(
+        subject='Вы сменили пароль',
+        message=f'Ваш новый пароль: {new_password}',
+        from_email=settings.EMAIL_HOST_USER,
+        recipient_list=[request.user.email],
+    )
+    request.user.set_password(new_password)
+    request.user.save()
+
+
+    return  redirect(reverse('catalog:home'))

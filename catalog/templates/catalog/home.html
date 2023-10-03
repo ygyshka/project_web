@@ -3,9 +3,11 @@
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <h1 class="display-4">Продукты</h1>
     </div>
+    {% if user.is_authenticated %}
     <div class="col-12 mb-5">
         <a type="button" class="btn btn-sm btn-primary" href="{% url 'catalog:create' %}">Добавить продукт</a>
     </div>
+    {% endif %}
 
     <div class="row text-center">
         {% for object in product_list %}
@@ -19,8 +21,6 @@
                         <h1 class="card-title pricing-card-title">$ {{ object.price }}</h1>
                         <ul class="list-unstyled mt-3 mb-4 text-start m-3 text-center">
                             <li>- {{ object.description|truncatechars:100 }}</li>
-{#select * from catalog_version#}
-{#join catalog_product on(catalog_product.id = catalog_version.product_id)#}
                             {% for version in object.versions.all %}
                                 {% if version.is_activ %}
                                     <hr>
@@ -28,17 +28,19 @@
                             <li>- Номер версии:{{ version.number}}</li>
                                 {% endif %}
                             {% endfor %}
-                        </ul>
+                        </ul><br>
+                        <span class="text-muted">{{ object.owner|default:'Нет владельца' }}</span>
                     </div>
                     <div class="card-footer">
                         <div class="btn-group-md">
                             <a href="{% url 'catalog:product' object.id %}" type="button"
                                class="btn btn-sm  btn-primary">Просмотреть</a>
+                            {% if user.is_authenticated %}
                             <a href="{% url 'catalog:update' object.id %}" type="button"
                                class="btn btn-sm btn-success">Изменить</a>
                             <a href="{% url 'catalog:product_confirm_delete' object.id %}" type="button"
                                class="btn btn-sm btn-danger">Удалить</a>
-
+                            {% endif %}
                         </div>
                     </div>
                 </div>
