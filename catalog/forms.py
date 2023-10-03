@@ -8,7 +8,7 @@ class MixinForm:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
-            if field_name != 'is_activ':
+            if field_name not in ['is_activ', 'is_active', 'is_superuser', 'is_staff']:
                 field.widget.attrs['class'] = 'form-control'
 
 

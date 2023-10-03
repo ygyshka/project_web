@@ -11,9 +11,9 @@ from django.utils.http import urlsafe_base64_decode
 from django.views import View
 from django.contrib.auth.tokens import (default_token_generator
                                         as token_generator)
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 
-from users.forms import MyAuthenticationForm, UserForm
+from users.forms import MyAuthenticationForm, UserForm, ProfileUserForm
 from users.models import User
 from users.utils import send_email_for_verify
 
@@ -28,33 +28,6 @@ class UserLoginView(LoginView):
 
 class UserLogoutView(LogoutView):
     pass
-
-
-
-
-# class UserRegisterView(CreateView):
-#     model = User
-#     form_class = UserForm
-#     template_name = 'users/register.html'
-#     success_url = reverse_lazy('users:login')
-#
-#     def form_valid(self, form):
-#         new_user = form.save()
-#         # new_user.is_active = False
-#         # send_mail(
-#         #     subject='Поздровляем с регистрацией',
-#         #     message=f'Вы зарегистрировались на нашей платформе!',
-#         #     from_email=settings.EMAIL_HOST_USER,
-#         #     recipient_list=[new_user.email],
-#         #
-#         # )
-#         user = authenticate(email=new_user.email, password=new_user.password)
-#         send_email_for_verify(new_user, user)
-#        # print(send_email_for_verify(new_user, user))
-#         return redirect('confirm_email')
-#
-#
-#         #return super().form_valid(form)
 
 
 class Register(View):
@@ -111,3 +84,16 @@ class EmailVerify(View):
         ):
             user = None
         return user
+
+class ProfileUpdateView(UpdateView):
+
+    model = User
+    form_class = ProfileUserForm
+    # success_url = redirect('users:profile')
+    success_url = reverse_lazy('users:profile')
+
+    def get_object(self, queryset=None):
+
+
+
+        return self.request.user
