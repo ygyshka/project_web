@@ -3,11 +3,11 @@
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <h1 class="display-4">Продукты</h1>
     </div>
-    {% if user.is_authenticated %}
+{#    {% if user.is_authenticated %}#}
     <div class="col-12 mb-5">
         <a type="button" class="btn btn-sm btn-primary" href="{% url 'catalog:create' %}">Добавить продукт</a>
     </div>
-    {% endif %}
+{#    {% endif %}#}
 
     <div class="row text-center">
         {% for object in product_list %}
@@ -35,12 +35,12 @@
                         <div class="btn-group-md">
                             <a href="{% url 'catalog:product' object.id %}" type="button"
                                class="btn btn-sm  btn-primary">Просмотреть</a>
-                            {% if user.is_authenticated %}
+{#                            {% if user.is_authenticated %}#}
                             <a href="{% url 'catalog:update' object.id %}" type="button"
                                class="btn btn-sm btn-success">Изменить</a>
                             <a href="{% url 'catalog:product_confirm_delete' object.id %}" type="button"
                                class="btn btn-sm btn-danger">Удалить</a>
-                            {% endif %}
+{#                            {% endif %}#}
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LogoutView
 from django.core.exceptions import ValidationError
@@ -21,7 +21,7 @@ from users.utils import send_email_for_verify
 
 # Create your views here.
 
-
+# @login_required(login_url='users/')
 class UserLoginView(LoginView):
     form_class = MyAuthenticationForm
     template_name = 'users/login.html'
@@ -87,7 +87,8 @@ class EmailVerify(View):
             user = None
         return user
 
-class ProfileUpdateView(UpdateView):
+
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     model = User
     form_class = ProfileUserForm
@@ -95,8 +96,6 @@ class ProfileUpdateView(UpdateView):
     success_url = reverse_lazy('users:profile')
 
     def get_object(self, queryset=None):
-
-
 
         return self.request.user
 

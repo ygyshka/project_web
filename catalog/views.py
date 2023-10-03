@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -9,7 +11,7 @@ from catalog.models import Product, Version
 
 
 # Create your views here.
-
+@login_required
 def contacts(request):
     print(request.method)
     if request.method == "POST":
@@ -20,18 +22,28 @@ def contacts(request):
 
     return render(request, 'catalog/contacts.html')
 
-
-class HomeListView(ListView):
+# Сделан вывод списка продуктов на страницу через FBV так как на момент решения задачи было не ясно,
+# как сделать такое через CBV
+# @login_required(login_url='users/')
+## @login_required
+## def home_list_view(request):
+##     product_list = Product.objects.all()
+##     context = {
+##         'product_list': product_list
+##     }
+##     return render(request, 'catalog/home.html', context)
+# Код на CBV для наглядности
+class HomeListView(LoginRequiredMixin, ListView):
     model = Product
     template_name = 'catalog/home.html'
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
     template_name = 'catalog/product.html'
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:home')
@@ -44,7 +56,7 @@ class ProductCreateView(CreateView):
         return super().form_valid(form)
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:home')
@@ -73,7 +85,7 @@ class ProductUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:home')
 
