@@ -147,3 +147,12 @@ EMAIL_HOST_USER = 'noreply@oscarbot.ru'
 EMAIL_HOST_PASSWORD = 'rsugpeacnrcvgyyr'
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
+
+# Чтобы поставить кеш-сервер Redis надо сделать еще несколько манипуляций на винде,
+# кроме установки через poetry в проект. Смиотреть инструкцию https://redis.io/docs   ?
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django.core.cache.backends.redis.RedisCache",
+#         "LOCATION": "redis://127.0.0.1:6379",
+#     }
+# }
