@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import authenticate
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm                             #UserCreationForm, AuthenticationForm, BaseUserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
+# UserCreationForm, AuthenticationForm, BaseUserCreationForm
 from django.core.exceptions import ValidationError
 
 from catalog.forms import MixinForm
@@ -19,7 +20,6 @@ class ProfileUserForm(MixinForm, UserChangeForm):
         self.fields['password'].widget = forms.HiddenInput()
 
 
-
 class UserForm(MixinForm, UserCreationForm):
 
     class Meta:
@@ -31,6 +31,7 @@ class MyAuthenticationForm(MixinForm, AuthenticationForm): #, BaseUserCreationFo
 
     def clean(self):
         username = self.cleaned_data.get("username")
+        # username = self.cleaned_data.get("email")
         password = self.cleaned_data.get("password")
 
         if username is not None and password:

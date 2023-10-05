@@ -22,9 +22,12 @@ def contacts(request):
 
     return render(request, 'catalog/contacts.html')
 
+# Пример реализации вывода списка продуктов на страницу пользователю,
+# с дополнительным закрытием доступа не авторирзованным пользователям
+
 # Сделан вывод списка продуктов на страницу через FBV так как на момент решения задачи было не ясно,
 # как сделать такое через CBV
-# @login_required(login_url='users/')
+# @login_required(login_url='users/') - декоратор для проверки прав доступа для залогиненых пользователей
 ## @login_required
 ## def home_list_view(request):
 ##     product_list = Product.objects.all()
@@ -32,7 +35,12 @@ def contacts(request):
 ##         'product_list': product_list
 ##     }
 ##     return render(request, 'catalog/home.html', context)
+# LoginRequiredMixin - базовый класс миксин для проверки аутентифицирован ли пользователь или нет(вошел в систему или нет)
+
+
 # Код на CBV для наглядности
+
+
 class HomeListView(LoginRequiredMixin, ListView):
     model = Product
     template_name = 'catalog/home.html'
