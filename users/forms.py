@@ -8,6 +8,7 @@ from catalog.forms import MixinForm
 from users.models import User
 from users.utils import send_email_for_verify
 
+
 class ProfileUserForm(MixinForm, UserChangeForm):
 
     class Meta:
@@ -24,10 +25,10 @@ class UserForm(MixinForm, UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('email', 'password1', 'password2')
+        fields = ('email', 'password')
 
 
-class MyAuthenticationForm(MixinForm, AuthenticationForm): #, BaseUserCreationForm):
+class MyAuthenticationForm(MixinForm, AuthenticationForm):
 
     def clean(self):
         username = self.cleaned_data.get("username")
@@ -38,14 +39,30 @@ class MyAuthenticationForm(MixinForm, AuthenticationForm): #, BaseUserCreationFo
             self.user_cache = authenticate(
                 self.request, username=username, password=password
             )
-            if not self.user_cache.email_verify:
+
+            # if self.user_cache is None:
+            #     raise ValidationError(
+            #         self.error_messages["invalid_login"], #- В базовом классе django в сообщении граматическая ошибка!?
+            #         code="invalid_login",
+            #         params={"username": self.username_field.verbose_name},
+            #     )
+
+            # if self.user_cache is None:
+            #     raise ValidationError(
+            #         'Пожалуйста, введите правильные логин и пароль. Оба поля могут быть чувствительны к регистру.',
+            #         # self.error_messages["invalid_login"],
+            #         code='invalid_login',
+            #     )
+
+            if self.user_cache is None:
+                raise self.get_invalid_login_error()
+
+            elif not self.user_cache.email_verify:
                 send_email_for_verify(self.request, self.user_cache)
                 raise ValidationError(
                     'Почта не верифицирована, проверьте вашу почту!',
                     code='invalid_login',
                 )
-            if self.user_cache is None:
-                raise self.get_invalid_login_error()
             else:
                 self.confirm_login_allowed(self.user_cache)
 
