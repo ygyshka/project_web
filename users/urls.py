@@ -2,7 +2,8 @@ from django.urls import path
 from django.views.generic import TemplateView
 
 from users.apps import UsersConfig
-from users.views import UserLoginView, UserLogoutView, Register, EmailVerify, ProfileUpdateView, generate_new_password
+from users.views import (UserLogoutView, Register, EmailVerify,
+                         ProfileUpdateView, generate_new_password, UserLoginView)
 
 app_name = UsersConfig.name
 

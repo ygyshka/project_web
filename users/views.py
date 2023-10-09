@@ -28,22 +28,8 @@ class UserLoginView(LoginView):
     form_class = MyAuthenticationForm
     # form_class = UserForm
     template_name = 'users/login.html'
-    # success_url = 'catalog/home.html'
+    success_url = 'catalog/home.html'
 
-
-# Возможный код на проверку корректности введенных данных для входа
-    # def form_valid(self, form):
-    #     user = User.objects.all()
-    #     new_user = form
-    #
-    #     for user in user.count:
-    #         # if user.email in new_user.fields['email']:
-    #         #     if user.password in new_user.fields['password']:
-    #         if user.email in new_user.fields['email'] or user.password in new_user.fields['password']:
-    #             # success_url = reverse_lazy('catalog:home')
-    #             return reverse_lazy('catalog:home')
-    #         else:
-    #             break
 
 class UserLogoutView(LogoutView):
     pass
