@@ -8,6 +8,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 from catalog.forms import ProductForm, VersionForm
 from catalog.models import Product, Version
+from catalog.services import get_category_cache
 
 
 # Create your views here.
@@ -36,6 +37,13 @@ def contacts(request):
 ##     }
 ##     return render(request, 'catalog/home.html', context)
 # LoginRequiredMixin - базовый класс миксин для проверки аутентифицирован ли пользователь или нет(вошел в систему или нет)
+
+#$def category_list_view(request):
+##     context = {
+##         'category_list': get_category_cache()
+##     }
+##     return render(request, 'catalog/<name_page_for_categories>.html', context)
+
 
 
 # Код на CBV для наглядности
