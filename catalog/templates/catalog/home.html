@@ -24,6 +24,7 @@
                             {% for version in object.versions.all %}
                                 {% if version.is_activ %}
                                     <hr>
+                                    <br>
                             <li>- Название версии:{{ version.title_version}}</li>
                             <li>- Номер версии:{{ version.number}}</li>
                                 {% endif %}
