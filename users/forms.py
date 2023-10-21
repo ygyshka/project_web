@@ -25,7 +25,7 @@ class UserForm(MixinForm, UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('email', 'password')
+        fields = ('email',)
 
 
 class MyAuthenticationForm(MixinForm, AuthenticationForm):
@@ -39,21 +39,6 @@ class MyAuthenticationForm(MixinForm, AuthenticationForm):
             self.user_cache = authenticate(
                 self.request, username=username, password=password
             )
-
-            # if self.user_cache is None:
-            #     raise ValidationError(
-            #         self.error_messages["invalid_login"], #- В базовом классе django в сообщении граматическая ошибка!?
-            #         code="invalid_login",
-            #         params={"username": self.username_field.verbose_name},
-            #     )
-
-            # if self.user_cache is None:
-            #     raise ValidationError(
-            #         'Пожалуйста, введите правильные логин и пароль. Оба поля могут быть чувствительны к регистру.',
-            #         # self.error_messages["invalid_login"],
-            #         code='invalid_login',
-            #     )
-
             if self.user_cache is None:
                 raise self.get_invalid_login_error()
 
