@@ -53,6 +53,12 @@ class HomeListView(LoginRequiredMixin, ListView):
     model = Product
     template_name = 'catalog/home.html'
 
+    def get_queryset(self):
+        query = super().get_queryset()
+        query = query.filter(owner=self.request.user)
+
+        return query
+
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
@@ -65,6 +71,7 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('catalog:home')
 
     def form_valid(self, form):
+
         self.object = form.save()
         self.object.owner = self.request.user
         self.object.save()
