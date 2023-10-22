@@ -107,6 +107,13 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 
         return super().form_valid(form)
 
+    def get_queryset(self):
+        query = super().get_queryset()
+        if not self.request.user.is_staff:
+            query = query.filter(owner=self.request.user)
+
+        return query
+
 
 class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
