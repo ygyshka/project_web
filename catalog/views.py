@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from catalog.forms import ProductForm, VersionForm
+from catalog.forms import ProductForm, VersionForm, ManagerForm
 from catalog.models import Product, Version
 from catalog.services import get_category_cache
 
@@ -55,7 +55,8 @@ class HomeListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         query = super().get_queryset()
-        query = query.filter(owner=self.request.user)
+        if self.request.user.is_staff:
+            query = query.filter(owner=self.request.user)
 
         return query
 
@@ -114,10 +115,22 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 
         return query
 
+    def get_form_class(self):
+        if self.request.user.is_staff:
+            return ManagerForm
+        return ProductForm
+
 
 class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:home')
+
+    def get_queryset(self):
+        query = super().get_queryset()
+        if self.request.user.is_staff:
+            query = query.filter(owner=self.request.user)
+
+        return query
 
 
 
