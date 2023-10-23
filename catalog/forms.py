@@ -46,3 +46,10 @@ class VersionForm(MixinForm, forms.ModelForm):
     class Meta:
         model = Version
         fields = '__all__'
+
+
+class ManagerForm(forms.ModelForm):
+
+    class Meta:
+        model = Product
+        fields = ('description', 'is_published', 'category_id',)
